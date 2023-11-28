@@ -18,16 +18,16 @@ public class EvalTeacher extends JFrame {
     private Map<String, Double> previousRatings = new HashMap<>();
 
     public EvalTeacher(){
-        super("½ÌÊ¦ÆÀ·Ö");
+        super("æ•™å¸ˆè¯„åˆ†");
         setSize(300, 340);
         setLocation(600, 400);
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        submitButton = new JButton("Ìá½»");
+        submitButton = new JButton("æäº¤");
         String file = System.getProperty("user.dir")+"/data/teacher.txt";
         String address = System.getProperty("user.dir")+"/data/rating.txt";
 
-        // Éú³ÉÆÀ·Ö½çÃæ
+        // ç”Ÿæˆè¯„åˆ†ç•Œé¢
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
@@ -37,7 +37,7 @@ public class EvalTeacher extends JFrame {
                 JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 row.add(new JLabel(teacherName));
 
-                JComboBox<String> box = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"}); //ÆÀ·Ö´Ó1-5
+                JComboBox<String> box = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"}); //è¯„åˆ†ä»1-5
                 row.add(box);
                 ratingBoxes.add(box);
                 teacherRatings.put(teacherName, box);
@@ -50,7 +50,7 @@ public class EvalTeacher extends JFrame {
         }
 
 
-        // ¶ÁÈ¡Ãû×ÖºÍÆÀ·Ö
+        // è¯»å–åå­—å’Œè¯„åˆ†
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader(address));
@@ -65,17 +65,17 @@ public class EvalTeacher extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Ìá½»°´Å¥
+        // æäº¤æŒ‰é’®
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (JComboBox<String> box : ratingBoxes) {
                     if (box.getSelectedItem() == null) {
-                        JOptionPane.showMessageDialog(EvalTeacher.this, "ÇëÎªËùÓĞµÄ½ÌÊ¦ÆÀ·Ö");
+                        JOptionPane.showMessageDialog(EvalTeacher.this, "è¯·ä¸ºæ‰€æœ‰çš„æ•™å¸ˆè¯„åˆ†");
                         return;
                     }
                 }
-                // ¼ÆËãÆ½¾ù·Ö²¢±£´æÎªratingÎÄ¼ş
+                // è®¡ç®—å¹³å‡åˆ†å¹¶ä¿å­˜ä¸ºratingæ–‡ä»¶
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(address));
                     DecimalFormat df = new DecimalFormat("#.#");
@@ -94,12 +94,12 @@ public class EvalTeacher extends JFrame {
                 }
             }
         });
-        // ¹ö¶¯Ìõ£¨½ÌÊ¦Ãû×ÖÒ»Ò³ÏÔÊ¾²»ÍêÊ±£©
+        // æ»šåŠ¨æ¡ï¼ˆæ•™å¸ˆåå­—ä¸€é¡µæ˜¾ç¤ºä¸å®Œæ—¶ï¼‰
         JScrollPane scrollPane = new JScrollPane(panel);
         add(scrollPane, BorderLayout.CENTER);
         add(submitButton, BorderLayout.SOUTH);
         pack();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 }
